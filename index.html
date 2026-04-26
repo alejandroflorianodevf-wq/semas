@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEMAS | Torno, Soldadura y Maquinado Industrial</title>
+  <meta name="description" content="SEMAS ofrece maquinado de piezas metálicas, torno, soldadura y soluciones industriales de precisión en Mexicali, Baja California." />
+  <style>
+    :root {
+      --bg: #0c1117;
+      --bg-soft: #121922;
+      --card: rgba(18, 25, 34, 0.78);
+      --line: rgba(255,255,255,0.08);
+      --text: #eef3f8;
+      --muted: #d8dce0;
+      --accent: #ff9f1c;
+      --accent-2: #26c6da;
+      --ok: #89ffb3;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,159,28,.14), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(38,198,218,.10), transparent 22%),
+        linear-gradient(180deg, #0b1015 0%, #0c1117 40%, #0f141b 100%);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: min(var(--max), calc(100% - 2rem)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(10, 14, 20, .72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .95rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(135deg, rgba(255,159,28,.22), rgba(38,198,218,.18)),
+        rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: .2s ease;
+      font-size: .96rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      padding: .92rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #ffbf69);
+      color: #141414;
+      box-shadow: 0 14px 34px rgba(255,159,28,.28);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 4.8rem 0 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .45rem .8rem;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      color: var(--ok);
+      font-size: .88rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: .98;
+      margin: 0 0 1rem;
+      letter-spacing: -.04em;
+    }
+
+    .hero p {
+      font-size: 1.06rem;
+      color: var(--muted);
+      max-width: 64ch;
+      margin: 0 0 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: .9rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .85rem;
+    }
+
+    .stat {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: .2rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 1.2rem;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -35% auto auto -20%;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(255,159,28,.24), transparent 65%);
+      pointer-events: none;
+    }
+
+    .machine-visual {
+      min-height: 470px;
+      border-radius: 22px;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02)),
+        linear-gradient(145deg, #141d27, #0c1117 70%);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 1.2rem;
+    }
+
+    .gridlines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.9), transparent 90%);
+      border-radius: 22px;
+    }
+
+    .machine {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 1.2rem;
+    }
+
+    .machine-frame {
+      width: min(100%, 420px);
+      aspect-ratio: 1 / 1.05;
+      position: relative;
+      filter: drop-shadow(0 16px 30px rgba(0,0,0,.35));
+    }
+
+    .machine-body, .machine-base, .machine-arm, .machine-arm-2, .machine-head, .machine-chuck, .spark {
+      position: absolute;
+    }
+
+    .machine-body {
+      inset: 15% 13% 18% 13%;
+      border-radius: 28px;
+      background: linear-gradient(180deg, #283746, #101821 72%);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .machine-base {
+      left: 8%; right: 8%; bottom: 7%; height: 10%;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #394858, #1a232d);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .machine-arm {
+      width: 44%; height: 11%; left: 18%; top: 27%;
+      border-radius: 18px;
+      transform: rotate(-8deg);
+      background: linear-gradient(180deg, #4b5b6c, #1f2a36);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .machine-arm-2 {
+      width: 12%; height: 33%; right: 24%; top: 21%;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #455465, #19222d);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .machine-head {
+      width: 22%; height: 20%; right: 12%; top: 26%;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #5e7085, #1e2832);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .machine-chuck {
+      width: 13%; height: 13%; right: 8%; top: 33%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #d8e0e8, #66788a 55%, #182028 70%);
+      box-shadow: 0 0 0 6px rgba(255,255,255,.03);
+      animation: spin 4s linear infinite;
+    }
+
+    .machine-window {
+      position: absolute;
+      left: 18%; top: 24%; width: 33%; height: 28%;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(38,198,218,.35), rgba(38,198,218,.08));
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(4px);
+      overflow: hidden;
+    }
+
+    .machine-window::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 10%, rgba(255,255,255,.15) 45%, transparent 75%);
+      transform: translateX(-100%);
+      animation: shine 4.8s ease-in-out infinite;
+    }
+
+    .control-panel {
+      position: absolute;
+      left: 19%; bottom: 23%; width: 28%; height: 16%;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #2a3643, #111922);
+      border: 1px solid rgba(255,255,255,.1);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .45rem;
+      padding: .75rem;
+    }
+
+    .dot {
+      border-radius: 10px;
+      background: rgba(255,255,255,.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dot::after {
+      content: "";
+      position: absolute;
+      inset: 22%;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255,159,28,.75), rgba(38,198,218,.85));
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    .spark {
+      width: 8px; height: 8px;
+      right: 22%; top: 39%;
+      border-radius: 50%;
+      background: #ffd166;
+      box-shadow:
+        0 0 16px rgba(255,209,102,.9),
+        16px -8px 0 0 rgba(255,159,28,.9),
+        24px 8px 0 0 rgba(255,209,102,.8),
+        8px 14px 0 0 rgba(255,190,92,.75);
+      animation: spark 1.5s ease-in-out infinite;
+      opacity: .9;
+    }
+
+    .floating-card {
+      position: absolute;
+      z-index: 3;
+      border-radius: 18px;
+      background: rgba(8, 12, 18, .76);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      padding: .9rem 1rem;
+      max-width: 230px;
+    }
+
+    .floating-top { top: 1rem; right: 1rem; }
+    .floating-bottom { left: 1rem; bottom: 1rem; }
+
+    .floating-card small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: .35rem;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .floating-card strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    section { padding: 1.5rem 0 4rem; }
+
+    .section-head {
+      margin-bottom: 1.6rem;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1.02;
+      margin: 0;
+      letter-spacing: -.03em;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 62ch;
+      margin: .55rem 0 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, rgba(255,159,28,.18), rgba(38,198,218,.16));
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .card h3 {
+      margin: 0 0 .55rem;
+      font-size: 1.15rem;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+      font-size: .97rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .checklist {
+      display: grid;
+      gap: .85rem;
+      margin-top: .9rem;
+    }
+
+    .check {
+      display: flex;
+      align-items: start;
+      gap: .75rem;
+      color: var(--muted);
+    }
+
+    .check b { color: var(--text); }
+
+    .step-list {
+      display: grid;
+      gap: .9rem;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: .9rem;
+      align-items: start;
+      padding: .9rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      background: linear-gradient(135deg, rgba(255,159,28,.22), rgba(38,198,218,.14));
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: .8rem;
+      align-items: start;
+      padding: .9rem 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .contact-item:first-child { border-top: 0; padding-top: 0; }
+
+    .contact-badge {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      flex: 0 0 auto;
+    }
+
+    .contact-item span {
+      color: var(--muted);
+      display: block;
+      margin-bottom: .2rem;
+      font-size: .9rem;
+    }
+
+    .contact-item strong {
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .cta {
+      padding: 1.35rem;
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(255,159,28,.14), rgba(38,198,218,.12)),
+        rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: var(--shadow);
+    }
+
+    .cta h3 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      margin: 0 0 .55rem;
+      line-height: 1.05;
+    }
+
+    .cta p {
+      color: var(--muted);
+      margin: 0 0 1rem;
+    }
+
+    .footer {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 1.5rem 0 2rem;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes shine {
+      0%, 20% { transform: translateX(-120%); }
+      55% { transform: translateX(120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    @keyframes spark {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: .55; }
+      50% { transform: translate(3px, -2px) scale(1.14); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: .65; transform: scale(.95); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .split,
+      .contact-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .machine-visual { min-height: 410px; }
+      .stats { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .nav-links { width: 100%; justify-content: space-between; }
+      .hero { padding-top: 3.2rem; }
+      .floating-card { position: static; margin-top: 1rem; max-width: none; }
+      .machine-visual { padding-bottom: 1rem; }
+      .machine-frame { width: 100%; }
+      h1 { letter-spacing: -.05em; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#inicio" class="brand" aria-label="Ir al inicio de SEMAS">
+        <div class="brand-mark">⚙️</div>
+        <div>
+          <div>SEMAS</div>
+          <small style="color: var(--muted); font-weight: 600; letter-spacing: .02em;">Torno · Soldadura · Maquinado</small>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#ventajas">Ventajas</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#cotizar" class="btn btn-primary">Solicitar cotización</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">● Precisión, calidad y soluciones rápidas</div>
+          <h1>Soluciones de torno, soldadura y maquinado industrial que sí resuelven.</h1>
+          <p>
+            En <strong>SEMAS</strong> fabricamos, reparamos y ajustamos piezas metálicas para maquinaria y equipo en general.
+            Atendemos proyectos personalizados, prototipos, reparaciones industriales y fabricación de componentes con enfoque en precisión, resistencia y cumplimiento.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#cotizar" class="btn btn-primary">Cotizar proyecto</a>
+            <a href="#servicios" class="btn btn-secondary">Ver servicios</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>Maquinado</strong>
+              <span>Piezas metálicas para maquinaria y equipo</span>
+            </div>
+            <div class="stat">
+              <strong>Personalización</strong>
+              <span>Trabajos sobre plano, prototipo o requerimiento</span>
+            </div>
+            <div class="stat">
+              <strong>Respuesta rápida</strong>
+              <span>Atención para proyectos industriales urgentes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-hidden="true">
+          <div class="machine-visual">
+            <div class="gridlines"></div>
+
+            <div class="floating-card floating-top">
+              <small>Especialidad</small>
+              <strong>Componentes industriales de precisión</strong>
+            </div>
+
+            <div class="machine">
+              <div class="machine-frame">
+                <div class="machine-body"></div>
+                <div class="machine-base"></div>
+                <div class="machine-arm"></div>
+                <div class="machine-arm-2"></div>
+                <div class="machine-head"></div>
+                <div class="machine-chuck"></div>
+                <div class="machine-window"></div>
+                <div class="control-panel">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+                <div class="spark"></div>
+              </div>
+            </div>
+
+            <div class="floating-card floating-bottom">
+              <small>Enfoque</small>
+              <strong>Fabricación, reparación y ajuste final de conjuntos mecánicos</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Servicios industriales de alto valor</h2>
+            <p>
+              No es solo “hacemos piezas”. La idea es que tu operación no se detenga, tu ensamble cierre bien y tu pieza no falle cuando más importa.
+            </p>
+          </div>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">🔩</div>
+            <h3>Maquinado a medida</h3>
+            <p>Ejes, árboles, engranajes, piñones, pistones, casquillos y componentes metálicos desarrollados según plano o necesidad técnica.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🛠️</div>
+            <h3>Reparación industrial</h3>
+            <p>Rectificado, recuperación y ajuste de piezas para devolver funcionalidad y alargar la vida útil de maquinaria y equipos.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🏗️</div>
+            <h3>Soldadura y estructuras</h3>
+            <p>Carcasas, soportes y estructuras metálicas de precisión con enfoque en resistencia, ensamble correcto y acabado profesional.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">⚙️</div>
+            <h3>Sistemas mecánicos</h3>
+            <p>Fabricación de componentes para sistemas hidráulicos y neumáticos, además de ensamblaje y ajuste final de conjuntos mecánicos.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🔥</div>
+            <h3>Tratamientos y acabados</h3>
+            <p>Tratamientos térmicos como temple y revenido, así como acabados superficiales y recubrimientos para mejorar desempeño y durabilidad.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📏</div>
+            <h3>Control de calidad</h3>
+            <p>Inspección dimensional y validación de piezas para asegurar ajuste, precisión y cumplimiento de especificaciones técnicas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ventajas">
+      <div class="container split">
+        <article class="card">
+          <div class="section-head" style="margin-bottom: 1rem;">
+            <div>
+              <h2>¿Por qué elegir SEMAS?</h2>
+              <p>Porque una pieza mal hecha sale carísima. Tiempo perdido, retrabajos, paros y clientes enojados. Ese combo no conviene.</p>
+            </div>
+          </div>
+
+          <div class="checklist">
+            <div class="check"><span>✔</span><div><b>Soluciones personalizadas:</b> desarrollo según plano, modelo o necesidad real del cliente.</div></div>
+            <div class="check"><span>✔</span><div><b>Precisión y durabilidad:</b> piezas pensadas para trabajo industrial, no para adornar el taller.</div></div>
+            <div class="check"><span>✔</span><div><b>Producción flexible:</b> prototipos, series cortas, reparaciones y ajustes finales.</div></div>
+            <div class="check"><span>✔</span><div><b>Enfoque práctico:</b> menos discurso bonito y más piezas que sí funcionen.</div></div>
+          </div>
+        </article>
+
+        <article class="card" id="proceso">
+          <div class="section-head" style="margin-bottom: 1rem;">
+            <div>
+              <h2>Cómo trabajamos</h2>
+              <p>Proceso claro para que la cotización no se vuelva novela de 14 capítulos.</p>
+            </div>
+          </div>
+
+          <div class="step-list">
+            <div class="step">
+              <div class="step-num">01</div>
+              <div>
+                <h3 style="margin: 0 0 .35rem;">Recibimos tu requerimiento</h3>
+                <p style="margin: 0;">Plano, muestra, medidas, material o problema mecánico a resolver.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">02</div>
+              <div>
+                <h3 style="margin: 0 0 .35rem;">Analizamos y cotizamos</h3>
+                <p style="margin: 0;">Definimos alcance, proceso, factibilidad técnica y tiempo estimado.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">03</div>
+              <div>
+                <h3 style="margin: 0 0 .35rem;">Fabricamos o reparamos</h3>
+                <p style="margin: 0;">Maquinado, soldadura, ajuste, tratamiento o acabado según el proyecto.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">04</div>
+              <div>
+                <h3 style="margin: 0 0 .35rem;">Entregamos con validación</h3>
+                <p style="margin: 0;">Inspección dimensional y revisión final para asegurar funcionalidad.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container contact-grid">
+        <article class="card">
+          <div class="section-head" style="margin-bottom: 1rem;">
+            <div>
+              <h2>Contacto y ubicación</h2>
+              <p>Si ya tienes plano, medidas o foto de la pieza, mándalo desde el primer mensaje. Así se avanza de verdad.</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-badge">📍</div>
+            <div>
+              <span>Dirección</span>
+              <strong>Avenida Río San Pedro Mezquital #2045, Fracc. Paseos del Sol, Mexicali, Baja California, C.P. 21399</strong>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-badge">📞</div>
+            <div>
+              <span>Teléfono</span>
+              <strong><a href="tel:6865803475">686 580 3475</a></strong>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-badge">✉️</div>
+            <div>
+              <span>Correo</span>
+              <strong><a href="mailto:ceo@semas.com">ceo@semas.com</a></strong>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-badge">🧭</div>
+            <div>
+              <span>Referencia</span>
+              <strong>Entre calle Laguna de Zempoala y boulevard Venustiano Carranza.</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="cta" id="cotizar">
+          <h3>¿Listo para cotizar tu pieza o reparación?</h3>
+          <p>
+            Esta sección ya está lista para convertir visitas en clientes. Puedes usar el botón para abrir correo directo o conectarlo después a WhatsApp, formulario web o CRM.
+          </p>
+
+          <div class="hero-actions" style="margin-bottom: 0;">
+            <a class="btn btn-primary" href="mailto:ceo@semas.com?subject=Cotización%20SEMAS&body=Hola%20SEMAS,%20quiero%20cotizar%20un%20proyecto.%0A%0ATipo%20de%20pieza:%0AMaterial:%0ACantidad:%0ADetalles:%0A">Enviar correo</a>
+            <a class="btn btn-secondary" href="tel:6865803475">Llamar ahora</a>
+          </div>
+
+          <div style="margin-top: 1.2rem; color: var(--muted); font-size: .94rem;">
+            <strong style="color: var(--text);">Tip útil:</strong> si quieres que esta web venda mejor todavía, el siguiente paso es agregar galería de trabajos, formulario conectado a correo y botón flotante de WhatsApp. Ahí ya deja de verse “bonita” y empieza a trabajar.
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> SEMAS. Torno, soldadura y maquinado industrial.</div>
+      <div>Diseño industrial moderno · Landing one page</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
